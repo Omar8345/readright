@@ -1,12 +1,19 @@
 "use client";
 
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Volume2, Eye, ChevronLeft, ChevronRight, X } from "lucide-react";
+import {
+  Volume2,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Share,
+} from "lucide-react";
 
 export const ReadPage = () => {
   const { documentId } = useParams<{ documentId: string }>();
@@ -15,6 +22,7 @@ export const ReadPage = () => {
   const [data, setData] = useState<any>(null);
   const [focusMode, setFocusMode] = useState(false);
   const [currentSection, setCurrentSection] = useState(0); // 0: TLDR, 1: Summary, 2: Audio, 3: Summary + Audio
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (!documentId) return;
@@ -77,7 +85,6 @@ export const ReadPage = () => {
   );
 
   const sections = ["TLDR", "Summary", "Audio", "Summary + Audio"];
-  const sectionColors = ["blue", "green", "purple", "indigo"];
 
   const colorClasses = {
     blue: "bg-blue-500",
@@ -94,8 +101,18 @@ export const ReadPage = () => {
     setCurrentSection((prev) => (prev - 1 + sections.length) % sections.length);
   };
 
-  const displayTitle =
-    data?.title && data.title !== "Untitled" ? data.title : null;
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+      alert("Failed to copy link");
+    }
+  };
+
+  const displayTitle = data?.title;
 
   if (focusMode) {
     const currentSectionData = {
@@ -227,6 +244,12 @@ export const ReadPage = () => {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <Navigation />
+        {showToast && (
+          <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 animate-in slide-in-from-top-2 duration-300">
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+            Link copied to clipboard!
+          </div>
+        )}
         <div className="container mx-auto px-4 py-16 pt-24">
           {/* Focus Mode Header */}
           <div className="flex items-center justify-between mb-8">
@@ -238,6 +261,14 @@ export const ReadPage = () => {
               >
                 <X className="w-4 h-4 mr-2" />
                 Exit Focus
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleShare}
+                className="border-slate-300 bg-transparent"
+              >
+                <Share className="w-4 h-4 mr-2" />
+                Share
               </Button>
               {currentSection === 0 && (
                 <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 text-sm font-medium rounded-full">
@@ -314,6 +345,12 @@ export const ReadPage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <Navigation />
+      {showToast && (
+        <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 animate-in slide-in-from-top-2 duration-300">
+          <div className="w-2 h-2 bg-white rounded-full"></div>
+          Link copied to clipboard!
+        </div>
+      )}
       <div className="container mx-auto px-4 py-16 pt-24">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 text-sm font-medium mb-4">
@@ -329,14 +366,24 @@ export const ReadPage = () => {
             Read any article, get a reader-friendly version, TL;DR summary, and
             audio narration instantly.
           </p>
-          <Button
-            onClick={() => setFocusMode(true)}
-            variant="outline"
-            className="mt-4 border-blue-300 text-blue-700 hover:bg-blue-50"
-          >
-            <Eye className="w-4 h-4 mr-2" />
-            Focus Mode
-          </Button>
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <Button
+              onClick={() => setFocusMode(true)}
+              variant="outline"
+              className="border-blue-300 text-blue-700 hover:bg-blue-50"
+            >
+              <Eye className="w-4 h-4 mr-2" />
+              Focus Mode
+            </Button>
+            <Button
+              onClick={handleShare}
+              variant="outline"
+              className="border-slate-300 text-slate-700 hover:bg-slate-50 bg-transparent"
+            >
+              <Share className="w-4 h-4 mr-2" />
+              Share
+            </Button>
+          </div>
         </div>
 
         {loading && (
@@ -346,7 +393,20 @@ export const ReadPage = () => {
           </div>
         )}
 
-        {error && <Navigate to="/404" />}
+        {error && (
+          <Card className="border-red-200 bg-red-50">
+            <CardContent className="p-6 text-center">
+              <p className="text-red-700 mb-4">Error: {error}</p>
+              <Button
+                onClick={() => window.location.reload()}
+                variant="outline"
+                className="border-red-300 text-red-700 hover:bg-red-100"
+              >
+                Retry
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
         {!loading && !error && data && (
           <div className="space-y-8">
