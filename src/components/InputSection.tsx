@@ -90,7 +90,7 @@ export const InputSection = () => {
           if (responseBody.status === "completed") {
             setIsProcessing(false);
             setShowDialog(false);
-            navigate(`/read/${workId}`);
+            navigate(`/read/${responseBody.id}`);
             completed = true;
           } else if (responseBody.status === "failed") {
             setError("Failed to process request.");
