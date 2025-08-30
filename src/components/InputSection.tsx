@@ -6,8 +6,16 @@ import { Card } from "@/components/ui/card";
 import { Link, FileText, Sparkles, ArrowRight } from "lucide-react";
 import { ErrorToast } from "@/components/ErrorToast";
 import { ProcessingDialog } from "@/components/ProcessingDialog";
-import axios from "axios";
+import { Client, Functions, ExecutionMethod } from "appwrite";
 import { useNavigate } from "react-router-dom";
+import { exec } from "child_process";
+
+const client = new Client();
+
+const functions = new Functions(client);
+
+client.setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
+client.setDevKey(import.meta.env.VITE_APPWRITE_API_KEY);
 
 export const InputSection = () => {
   const [inputType, setInputType] = useState<"url" | "text">("url");
@@ -56,22 +64,46 @@ export const InputSection = () => {
     setIsProcessing(true);
     setShowDialog(true);
 
-    const endpoint = import.meta.env.VITE_APPWRITE_FUNCTION_ENDPOINT;
-
     try {
       const payload =
         inputType === "url" ? { url: urlValue.trim() } : { text: textValue };
 
-      const response = await axios({
-        method: "post",
-        url: endpoint,
-        data: payload,
-      });
-
-      const data = response.data;
-      setIsProcessing(false);
-      setShowDialog(false);
-      navigate(`/read/${data.id}`);
+      try {
+        const res = await functions.createExecution(
+          import.meta.env.VITE_APPWRITE_FUNCTION_ID,
+          JSON.stringify(payload),
+          true,
+          "/",
+          ExecutionMethod.POST
+        );
+        const workId = res.$id;
+        await new Promise((resolve) => setTimeout(resolve, 35000));
+        let completed = false;
+        while (!completed) {
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+          const exec = await functions.createExecution(
+            import.meta.env.VITE_APPWRITE_FUNCTION_ID,
+            JSON.stringify({ workerId: workId }),
+            false,
+            "/",
+            ExecutionMethod.GET
+          );
+          const responseBody = JSON.parse(exec.responseBody);
+          if (responseBody.status === "completed") {
+            setIsProcessing(false);
+            setShowDialog(false);
+            navigate(`/read/${workId}`);
+            completed = true;
+          } else if (responseBody.status === "failed") {
+            setError("Failed to process request.");
+            setIsProcessing(false);
+            setShowDialog(false);
+            completed = true;
+          }
+        }
+      } catch (error) {
+        throw error;
+      }
     } catch (e: any) {
       setError(
         `Failed to process request. Please double-check your URL or text.`

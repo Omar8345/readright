@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -14,6 +14,12 @@ import {
   X,
   Share,
 } from "lucide-react";
+import { Client, TablesDB } from "appwrite";
+
+const client = new Client()
+  .setEndpoint(import.meta.env.VITE_APPWRITE_API_ENDPOINT)
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
+const tablesDB = new TablesDB(client);
 
 export const ReadPage = () => {
   const { documentId } = useParams<{ documentId: string }>();
@@ -29,17 +35,13 @@ export const ReadPage = () => {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_APPWRITE_API_ENDPOINT}/databases/${
-            import.meta.env.VITE_APPWRITE_DATABASE_ID
-          }/collections/articles/documents/${documentId}?project=${
-            import.meta.env.VITE_APPWRITE_PROJECT_ID
-          }`
-        );
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        const json = await res.json();
-        if (!cancelled) {
-          setData(json);
+        const res = await tablesDB.getRow({
+          databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
+          tableId: import.meta.env.VITE_APPWRITE_TABLE_ID,
+          rowId: documentId,
+        });
+        if (res.simplifiedText) {
+          setData(res);
           setLoading(false);
         }
       } catch (e: any) {
@@ -393,20 +395,7 @@ export const ReadPage = () => {
           </div>
         )}
 
-        {error && (
-          <Card className="border-red-200 bg-red-50">
-            <CardContent className="p-6 text-center">
-              <p className="text-red-700 mb-4">Error: {error}</p>
-              <Button
-                onClick={() => window.location.reload()}
-                variant="outline"
-                className="border-red-300 text-red-700 hover:bg-red-100"
-              >
-                Retry
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+        {error && <Navigate to="/404" />}
 
         {!loading && !error && data && (
           <div className="space-y-8">
