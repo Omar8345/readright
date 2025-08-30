@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Link, FileText, Sparkles, ArrowRight } from "lucide-react";
+import { ErrorToast } from "@/components/ErrorToast";
 import { ProcessingDialog } from "@/components/ProcessingDialog";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const InputSection = () => {
   const [inputType, setInputType] = useState<"url" | "text">("url");
@@ -13,9 +15,9 @@ export const InputSection = () => {
   const [textValue, setTextValue] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [documentId, setDocumentId] = useState<string | null>(null);
-
   const [error, setError] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
+  const navigate = useNavigate();
 
   const isUrlValid =
     inputType === "url" &&
@@ -68,22 +70,21 @@ export const InputSection = () => {
         data: payload,
       });
 
-      if (response.status !== 200) {
-        const msg =
-          response.data?.message || `Request failed (${response.status})`;
-        throw new Error(msg);
-      }
-
       const data = response.data;
       setDocumentId(data.id);
     } catch (e: any) {
-      setError(e.message || "Unexpected error.");
+      setError(
+        `Failed to process request. Please double-check your URL or text.`
+      );
       setIsProcessing(false);
+      setShowDialog(false);
       return;
     }
 
     setTimeout(() => {
       setIsProcessing(false);
+      setShowDialog(false);
+      navigate(`/read/${documentId}`);
     }, 600);
   };
 
@@ -185,14 +186,8 @@ export const InputSection = () => {
                 </div>
               )}
 
-              {/* Error */}
               {error && (
-                <div
-                  className="text-sm text-destructive font-inter"
-                  aria-live="polite"
-                >
-                  {error}
-                </div>
+                <ErrorToast message={error} onClose={() => setError(null)} />
               )}
 
               {/* Process Button */}
@@ -222,7 +217,6 @@ export const InputSection = () => {
         </div>
       </div>
 
-      {/* Processing Dialog Preview */}
       <ProcessingDialog
         isOpen={showDialog}
         onOpenChange={(open) => {
@@ -231,7 +225,6 @@ export const InputSection = () => {
             setIsProcessing(false);
           }
         }}
-        documentId={documentId ?? undefined}
       />
     </section>
   );
