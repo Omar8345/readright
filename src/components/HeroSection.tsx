@@ -25,12 +25,10 @@ export const HeroSection = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight font-poppins">
-              <span className="text-foreground">ReadRight</span>
-              <br />
-              <span className="gradient-text">Accessible Reading</span>
-              <br />
-              <span className="text-foreground">Made Simple</span>
+            <h1 className="text-5xl lg:text-7xl font-bold font-poppins space-y-2">
+              <span className="block text-foreground">ReadRight</span>
+              <span className="block gradient-text">Accessible Reading</span>
+              <span className="block text-foreground">Made Simple</span>
             </h1>
 
             {/* Subheadline */}
@@ -45,6 +43,9 @@ export const HeroSection = () => {
               <Button
                 variant="hero"
                 size="lg"
+                onClick={() =>
+                  document.getElementById("demo")?.scrollIntoView()
+                }
                 className="group px-8 py-6 text-lg font-poppins"
               >
                 Try it Now

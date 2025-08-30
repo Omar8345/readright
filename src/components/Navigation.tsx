@@ -33,14 +33,12 @@ export const Navigation = () => {
             >
               Features
             </a>
-            <a
-              href="#demo"
-              className="text-foreground hover:text-primary transition-colors duration-300 font-inter font-medium"
-            >
-              Demo
-            </a>
 
-            <Button variant="hero" className="ml-4">
+            <Button
+              variant="hero"
+              className="ml-4"
+              onClick={() => document.getElementById("demo")?.scrollIntoView()}
+            >
               Try it Now
             </Button>
           </div>

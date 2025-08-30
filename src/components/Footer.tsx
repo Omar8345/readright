@@ -27,6 +27,9 @@ export const Footer = () => {
                 variant="ghost"
                 size="sm"
                 className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                onClick={() =>
+                  window.open("https://x.com/DevOmar100", "_blank")
+                }
               >
                 <Twitter className="w-5 h-5" />
               </Button>
@@ -34,6 +37,9 @@ export const Footer = () => {
                 variant="ghost"
                 size="sm"
                 className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                onClick={() =>
+                  window.open("https://github.com/Omar8345/readright", "_blank")
+                }
               >
                 <Github className="w-5 h-5" />
               </Button>
@@ -41,6 +47,7 @@ export const Footer = () => {
                 variant="ghost"
                 size="sm"
                 className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                onClick={() => window.open("mailto:yo@omarcodes.io", "_blank")}
               >
                 <Mail className="w-5 h-5" />
               </Button>

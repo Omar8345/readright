@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Eye, FileText, Volume2, Settings, Zap, Shield } from "lucide-react";
+import { Eye, FileText, Volume2, Settings, Zap, Cloud } from "lucide-react";
 
 const features = [
   {
@@ -43,10 +43,10 @@ const features = [
     bgColor: "bg-primary/10",
   },
   {
-    icon: Shield,
-    title: "Privacy First",
+    icon: Cloud,
+    title: "Cloud Access",
     description:
-      "Your content stays private - we don't store or track your reading",
+      "Your simplified text and audio are stored securely so you can revisit anytime",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
