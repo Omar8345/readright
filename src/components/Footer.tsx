@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Github, Twitter, Mail, Sparkles } from "lucide-react";
+import { Heart, Github, Twitter, Mail, Book } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -11,7 +11,7 @@ export const Footer = () => {
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-secondary-foreground" />
+                <Book className="w-6 h-6 text-secondary-foreground" />
               </div>
               <h3 className="text-3xl font-bold font-poppins">ReadRight</h3>
             </div>

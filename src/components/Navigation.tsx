@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Menu, X } from "lucide-react";
+import { Book, Menu, X } from "lucide-react";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,7 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+              <Book className="w-5 h-5 text-primary-foreground" />
             </div>
             <h1 className="text-2xl font-bold font-poppins text-foreground">
               ReadRight
@@ -22,13 +22,13 @@ export const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <a
-              href="#home"
+              href="/#home"
               className="text-foreground hover:text-primary transition-colors duration-300 font-inter font-medium"
             >
               Home
             </a>
             <a
-              href="#features"
+              href="/#features"
               className="text-foreground hover:text-primary transition-colors duration-300 font-inter font-medium"
             >
               Features
@@ -37,7 +37,7 @@ export const Navigation = () => {
             <Button
               variant="hero"
               className="ml-4"
-              onClick={() => document.getElementById("demo")?.scrollIntoView()}
+              onClick={() => (window.location.href = "/#demo")}
             >
               Try it Now
             </Button>

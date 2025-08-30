@@ -14,7 +14,6 @@ export const InputSection = () => {
   const [urlValue, setUrlValue] = useState("");
   const [textValue, setTextValue] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const [documentId, setDocumentId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +55,6 @@ export const InputSection = () => {
     setError(null);
     setIsProcessing(true);
     setShowDialog(true);
-    setDocumentId(null);
 
     const endpoint = import.meta.env.VITE_APPWRITE_FUNCTION_ENDPOINT;
 
@@ -71,7 +69,9 @@ export const InputSection = () => {
       });
 
       const data = response.data;
-      setDocumentId(data.id);
+      setIsProcessing(false);
+      setShowDialog(false);
+      navigate(`/read/${data.id}`);
     } catch (e: any) {
       setError(
         `Failed to process request. Please double-check your URL or text.`
@@ -80,12 +80,6 @@ export const InputSection = () => {
       setShowDialog(false);
       return;
     }
-
-    setTimeout(() => {
-      setIsProcessing(false);
-      setShowDialog(false);
-      navigate(`/read/${documentId}`);
-    }, 600);
   };
 
   return (
