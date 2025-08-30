@@ -8,14 +8,12 @@ import { ErrorToast } from "@/components/ErrorToast";
 import { ProcessingDialog } from "@/components/ProcessingDialog";
 import { Client, Functions, ExecutionMethod } from "appwrite";
 import { useNavigate } from "react-router-dom";
-import { exec } from "child_process";
 
-const client = new Client();
+const client = new Client()
+  .setEndpoint(import.meta.env.VITE_APPWRITE_API_ENDPOINT)
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
 const functions = new Functions(client);
-
-client.setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
-client.setDevKey(import.meta.env.VITE_APPWRITE_API_KEY);
 
 export const InputSection = () => {
   const [inputType, setInputType] = useState<"url" | "text">("url");
