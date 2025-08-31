@@ -6,8 +6,9 @@ import { Card } from "@/components/ui/card";
 import { Link, FileText, Sparkles, ArrowRight } from "lucide-react";
 import { ErrorToast } from "@/components/ErrorToast";
 import { ProcessingDialog } from "@/components/ProcessingDialog";
-import { Client, Functions, ExecutionMethod } from "appwrite";
+import { Client, Functions, ExecutionMethod, ID } from "appwrite";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const client = new Client()
   .setEndpoint(import.meta.env.VITE_APPWRITE_API_ENDPOINT)
@@ -63,8 +64,11 @@ export const InputSection = () => {
     setShowDialog(true);
 
     try {
+      const readId = ID.unique();
       const payload =
-        inputType === "url" ? { url: urlValue.trim() } : { text: textValue };
+        inputType === "url"
+          ? { url: urlValue.trim(), docid: readId }
+          : { text: textValue, docid: readId };
 
       try {
         const res = await functions.createExecution(
@@ -79,18 +83,19 @@ export const InputSection = () => {
         let completed = false;
         while (!completed) {
           await new Promise((resolve) => setTimeout(resolve, 5000));
-          const exec = await functions.createExecution(
-            import.meta.env.VITE_APPWRITE_FUNCTION_ID,
-            JSON.stringify({ workerId: workId }),
-            false,
-            "/",
-            ExecutionMethod.GET
+          const exec = await axios.get(
+            `${
+              import.meta.env.VITE_APPWRITE_WORKER_ENDPOINT
+            }/?workerid=${workId}`
           );
-          const responseBody = JSON.parse(exec.responseBody);
-          if (responseBody.status === "completed") {
+          const responseBody = exec.data;
+          if (
+            responseBody.status === "completed" &&
+            responseBody.responseStatusCode === 200
+          ) {
             setIsProcessing(false);
             setShowDialog(false);
-            navigate(`/read/${responseBody.id}`);
+            navigate(`/read/${readId}`);
             completed = true;
           } else if (responseBody.status === "failed") {
             setError("Failed to process request.");
