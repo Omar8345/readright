@@ -99,7 +99,7 @@ export const HeroSection = () => {
       <VideoModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
-        videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        videoUrl="https://www.youtube.com/embed/gEHv5HpLWUA?si=oNeJxCFoSZ0LFnr8"
       />
     </section>
   );
