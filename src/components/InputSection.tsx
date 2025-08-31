@@ -79,15 +79,12 @@ export const InputSection = () => {
           ExecutionMethod.POST
         );
         const workId = res.$id;
-        await new Promise((resolve) => setTimeout(resolve, 35000));
+        await new Promise((resolve) => setTimeout(resolve, 25000));
         let completed = false;
         while (!completed) {
           await new Promise((resolve) => setTimeout(resolve, 5000));
           const exec = await axios.get(
-            `${
-              import.meta.env.VITE_APPWRITE_WORKER_URL ??
-              "https://readrightworker.fra.appwrite.run"
-            }/?workerid=${workId}`
+            `https://readrightworker.fra.appwrite.run/?workerid=${workId}`
           );
           const responseBody = exec.data;
           if (
