@@ -84,9 +84,7 @@ export const InputSection = () => {
         while (!completed) {
           await new Promise((resolve) => setTimeout(resolve, 5000));
           const exec = await axios.get(
-            `${
-              import.meta.env.VITE_APPWRITE_WORKER_ENDPOINT
-            }/?workerid=${workId}`
+            `${import.meta.env.VITE_APPWRITE_WORKER_URL}/?workerid=${workId}`
           );
           const responseBody = exec.data;
           if (
