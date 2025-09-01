@@ -107,7 +107,7 @@ export const ReadPage = () => {
 
         {loading && <LoadingState />}
 
-        {error && <Navigate to="/404" />}
+        {error && <Navigate to="/" />}
 
         {!loading && !error && data && (
           <div className="space-y-8">
