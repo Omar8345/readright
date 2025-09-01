@@ -22,16 +22,16 @@ ReadRight is packed with powerful features to enhance the reading experience:
 ReadRight leverages a modern and robust set of technologies to deliver its accessible features:
 
 - **Frontend**:
-  - **React**: A declarative, component-based JavaScript library for building user interfaces.
-  - **TypeScript**: A superset of JavaScript that adds static typing, improving code quality and maintainability.
-  - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
-  - **shadcn/ui**: A collection of beautifully designed components built with Radix UI and Tailwind CSS.
-  - **React Router**: For declarative routing in the application.
+  - **React**
+  - **TypeScript**
+  - **Tailwind CSS**
+  - **shadcn/ui**
+  - **React Router**
 - [**Backend & AI**](https://github.com/Omar8345/readright-backend):
-  - **Appwrite**: An open-source backend-as-a-service platform used for database management and potentially other backend services.
-  - **Google Gemini 2.5 Flash**: Utilized for advanced AI processing, likely for text simplification and summarization.
-  - **Microsoft's Text-to-Speech Service**: Powers the high-quality audio narration feature.
-  - **Python**: The primary language used for the backend processing logic, interacting with AI services and Appwrite.
+  - **Python**
+  - **Appwrite**: An open-source backend-as-a-service platform.
+  - **Google Gemini 2.5 Flash**: Utilized for AI processing.
+  - **Microsoft's Text-to-Speech Service**: Powers the TTS feature.
 
 ## 🤝 Contributing
 
