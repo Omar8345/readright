@@ -17,9 +17,9 @@ export const HeroSection = () => {
           {/* Content Column */}
           <div className="space-y-8 animate-fadeInUp">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-soft">
-              <Sparkles className="w-4 h-4 text-secondary" />
-              <span className="text-sm font-medium text-primary-foreground font-inter">
+            <div className="inline-flex items-center gap-2 bg-gray-200/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-soft">
+              <Sparkles className="w-4 h-4 text-yellow-500 dark:text-yellow-400" />
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100 font-inter">
                 Accessibility Made Simple
               </span>
             </div>
@@ -41,22 +41,20 @@ export const HeroSection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                variant="hero"
                 size="lg"
                 onClick={() =>
                   document.getElementById("demo")?.scrollIntoView()
                 }
-                className="group px-8 py-6 text-lg font-poppins"
+                className="group px-8 py-6 text-lg font-poppins bg-blue-600 text-white dark:bg-yellow-400 dark:text-black rounded-xl shadow-lg hover:bg-blue-700 dark:hover:bg-yellow-300 transition-colors"
               >
                 Try it Now
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
 
               <Button
-                variant="floating"
                 size="lg"
                 onClick={() => setIsVideoOpen(true)}
-                className="group px-8 py-6 text-lg font-poppins"
+                className="group px-8 py-6 text-lg font-poppins bg-green-500 text-white dark:bg-green-700 dark:text-white rounded-xl shadow-lg hover:bg-green-600 dark:hover:bg-green-600 transition-colors flex items-center gap-2"
               >
                 <Play className="w-5 h-5" />
                 View Demo
@@ -66,7 +64,7 @@ export const HeroSection = () => {
 
           {/* Image Column */}
           <div className="relative animate-fadeInUp delay-300">
-            <div className="relative bg-gradient-card rounded-3xl p-8 shadow-float group">
+            <div className="relative rounded-3xl p-8 shadow-float group">
               <img
                 src={heroImage}
                 alt="People reading with accessibility tools - showing diverse users engaging with readable content"
@@ -74,23 +72,22 @@ export const HeroSection = () => {
               />
 
               {/* Floating UI Elements */}
-              <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-4 py-2 rounded-xl shadow-medium animate-float-delayed">
+              <div className="absolute -top-4 -right-4 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-4 py-2 rounded-xl shadow-md animate-float-delayed">
                 <div className="flex items-center gap-2 text-sm font-medium font-inter">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                   TL;DR Ready!
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -left-4 bg-primary text-primary-foreground px-4 py-2 rounded-xl shadow-medium animate-float-delayed">
+              <div className="absolute -bottom-4 -left-4 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-4 py-2 rounded-xl shadow-md animate-float-delayed">
                 <div className="flex items-center gap-2 text-sm font-medium font-inter">
-                  <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-yellow-500 dark:bg-yellow-400 rounded-full animate-pulse" />
                   Audio Playing
                 </div>
               </div>
             </div>
 
             {/* Background Glow */}
-            <div className="absolute inset-0 bg-gradient-secondary opacity-20 rounded-3xl blur-3xl -z-10 animate-pulse-glow" />
           </div>
         </div>
       </div>

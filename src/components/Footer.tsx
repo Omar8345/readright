@@ -3,20 +3,20 @@ import { Heart, Github, Twitter, Mail, Book } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground py-20">
+    <footer className="bg-primary dark:bg-gray-900 text-primary-foreground dark:text-gray-100 py-20">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="grid lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center">
-                <Book className="w-6 h-6 text-secondary-foreground" />
+              <div className="w-12 h-12 bg-secondary dark:bg-gray-700 rounded-2xl flex items-center justify-center">
+                <Book className="w-6 h-6 text-secondary-foreground dark:text-gray-200" />
               </div>
               <h3 className="text-3xl font-bold font-poppins">ReadRight</h3>
             </div>
 
-            <p className="text-xl text-primary-foreground/80 leading-relaxed max-w-2xl font-inter">
+            <p className="text-xl text-primary-foreground/80 dark:text-gray-300 leading-relaxed max-w-2xl font-inter">
               Making the web more accessible, one article at a time. ReadRight
               transforms any content into a dyslexia-friendly, audio-enabled
               reading experience.
@@ -26,7 +26,7 @@ export const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                className="text-primary-foreground dark:text-gray-100 hover:bg-primary-foreground/20 dark:hover:bg-gray-700 rounded-full p-3"
                 onClick={() =>
                   window.open("https://x.com/DevOmar100", "_blank")
                 }
@@ -36,7 +36,7 @@ export const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                className="text-primary-foreground dark:text-gray-100 hover:bg-primary-foreground/20 dark:hover:bg-gray-700 rounded-full p-3"
                 onClick={() =>
                   window.open("https://github.com/Omar8345/readright", "_blank")
                 }
@@ -46,7 +46,7 @@ export const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/20 rounded-full p-3"
+                className="text-primary-foreground dark:text-gray-100 hover:bg-primary-foreground/20 dark:hover:bg-gray-700 rounded-full p-3"
                 onClick={() => window.open("mailto:yo@omarcodes.io", "_blank")}
               >
                 <Mail className="w-5 h-5" />
@@ -56,8 +56,8 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-primary-foreground/20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-primary-foreground/60 font-inter">
+        <div className="border-t border-primary-foreground/20 dark:border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-primary-foreground/60 dark:text-gray-400 font-inter">
             © 2025 ReadRight. Made with{" "}
             <Heart className="w-4 h-4 inline text-red-400" /> for accessibility.
           </p>

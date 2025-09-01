@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Read from "./pages/Read";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <DarkModeToggle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

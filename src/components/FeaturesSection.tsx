@@ -73,7 +73,7 @@ export const FeaturesSection = () => {
           {features.map((feature, index) => (
             <Card
               key={feature.title}
-              className="p-8 bg-gradient-card border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2 hover:rotate-1 animate-fadeInUp group cursor-pointer"
+              className="p-8 bg-white dark:bg-gray-800 border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2 hover:rotate-1 animate-fadeInUp group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div

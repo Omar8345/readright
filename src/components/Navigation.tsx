@@ -35,8 +35,7 @@ export const Navigation = () => {
             </a>
 
             <Button
-              variant="hero"
-              className="ml-4"
+              className="ml-4 px-6 py-3 text-lg font-poppins bg-blue-600 text-white dark:bg-yellow-400 dark:text-black rounded-xl shadow-lg hover:bg-blue-700 dark:hover:bg-yellow-300 transition-colors"
               onClick={() => (window.location.href = "/#demo")}
             >
               Try it Now
@@ -74,22 +73,7 @@ export const Navigation = () => {
               >
                 Features
               </a>
-              <a
-                href="#demo"
-                className="text-foreground hover:text-primary transition-colors duration-300 font-inter font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Demo
-              </a>
-              <a
-                href="#contact"
-                className="text-foreground hover:text-primary transition-colors duration-300 font-inter font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </a>
-
-              <Button variant="hero" className="mt-4 self-start">
+              <Button className="mt-4 self-start px-6 py-3 text-lg font-poppins bg-blue-600 text-white dark:bg-yellow-400 dark:text-black rounded-xl shadow-lg hover:bg-blue-700 dark:hover:bg-yellow-300 transition-colors">
                 Try it Now
               </Button>
             </div>
