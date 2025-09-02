@@ -23,11 +23,12 @@ export const ReadPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
   const [focusMode, setFocusMode] = useState(false);
-  const [currentSection, setCurrentSection] = useState(0); // 0: TLDR, 1: Summary, 2: Audio, 3: Summary + Audio
+  const [currentSection, setCurrentSection] = useState(0);
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (!documentId) return;
+    window.scrollTo(0, 0);
     let cancelled = false;
     (async () => {
       try {
