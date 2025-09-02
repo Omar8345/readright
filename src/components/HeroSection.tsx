@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { VideoModal } from "@/components/VideoModal";
@@ -6,6 +6,14 @@ import heroImage from "@/assets/hero-reading.jpg";
 
 export const HeroSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  // Preload hero image only when HeroSection is mounted
+  useEffect(() => {
+    const img = new Image();
+    img.src = heroImage;
+    img.onload = () => setLoaded(true);
+  }, []);
 
   return (
     <section
@@ -65,10 +73,17 @@ export const HeroSection = () => {
           {/* Image Column */}
           <div className="relative animate-fadeInUp delay-300">
             <div className="relative rounded-3xl p-8 shadow-float group">
+              {/* Placeholder until hero image loads */}
+              {!loaded && (
+                <div className="w-full h-[400px] rounded-2xl bg-gray-200 dark:bg-gray-700 animate-pulse" />
+              )}
+
               <img
                 src={heroImage}
                 alt="People reading with accessibility tools - showing diverse users engaging with readable content"
-                className="w-full h-auto rounded-2xl shadow-medium transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2"
+                className={`w-full h-auto rounded-2xl shadow-medium transition-all duration-700 group-hover:scale-105 group-hover:rotate-2 ${
+                  loaded ? "opacity-100" : "opacity-0"
+                }`}
               />
 
               {/* Floating UI Elements */}
@@ -86,8 +101,6 @@ export const HeroSection = () => {
                 </div>
               </div>
             </div>
-
-            {/* Background Glow */}
           </div>
         </div>
       </div>
