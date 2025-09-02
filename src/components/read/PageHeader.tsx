@@ -17,8 +17,6 @@ export const PageHeader = ({
   onShare,
 }: PageHeaderProps) => (
   <div className="text-center mb-12">
-    {" "}
-    {/* reduced space from navbar */}
     {/* Title */}
     {title && (
       <h1 className="text-4xl font-bold font-poppins text-slate-900 dark:text-gray-100 mb-3">
