@@ -132,7 +132,7 @@ export const InputSection = () => {
           </div>
 
           {/* Input Card */}
-          <Card className="p-8 shadow-float bg-white dark:bg-gray-800 border border-border dark:border-gray-700 animate-fadeInUp delay-200">
+          <Card className="p-8 shadow-float bg-white dark:bg-gray-800 border border-border dark:border-gray-700 animate-fadeInUp">
             {/* Input Type Tabs */}
             <div className="flex gap-2 mb-8">
               <Button
