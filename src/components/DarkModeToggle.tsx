@@ -4,7 +4,6 @@ import { Sun, Moon } from "lucide-react";
 export const DarkModeToggle = () => {
   const [dark, setDark] = useState(false);
 
-  // Initialize theme from localStorage on mount
   useEffect(() => {
     const savedTheme =
       typeof window !== "undefined" ? localStorage.getItem("theme") : null;
@@ -18,7 +17,6 @@ export const DarkModeToggle = () => {
     }
   }, []);
 
-  // Apply theme whenever dark changes
   useEffect(() => {
     if (dark) document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");

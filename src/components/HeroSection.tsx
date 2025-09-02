@@ -8,7 +8,6 @@ export const HeroSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Preload hero image only when HeroSection is mounted
   useEffect(() => {
     const img = new Image();
     img.src = heroImage;
