@@ -53,6 +53,12 @@ export const ReadPage = () => {
     };
   }, [documentId]);
 
+  const readTimeText = data?.simplifiedText
+    ? `${Math.ceil(
+        data.simplifiedText.trim().split(/\s+/).length / 200
+      )} min read`
+    : undefined;
+
   const nextSection = () => {
     setCurrentSection((prev) => (prev + 1) % 4);
   };
@@ -102,14 +108,13 @@ export const ReadPage = () => {
       <div className="container mx-auto px-4 py-16 pt-24">
         <PageHeader
           title={displayTitle}
+          readTimeText={readTimeText} // pass the badge text
           onFocusMode={() => setFocusMode(true)}
           onShare={handleShare}
         />
 
         {loading && <LoadingState />}
-
         {error && <Navigate to="/" />}
-
         {!loading && !error && data && (
           <div className="space-y-8">
             <div className="grid gap-8 lg:grid-cols-3">

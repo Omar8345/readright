@@ -1,41 +1,41 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Volume2, Eye, Share } from "lucide-react";
+import { Eye, Share, Clock } from "lucide-react";
 
 interface PageHeaderProps {
   title?: string;
+  readTimeText?: string;
   onFocusMode: () => void;
   onShare: () => void;
 }
 
 export const PageHeader = ({
   title,
+  readTimeText,
   onFocusMode,
   onShare,
 }: PageHeaderProps) => (
   <div className="text-center mb-12">
-    {/* Badge */}
-    <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 text-sm font-medium mb-4 rounded-md">
-      <Volume2 className="w-4 h-4" />
-      Accessible Web Reader
-    </div>
-
+    {" "}
+    {/* reduced space from navbar */}
     {/* Title */}
     {title && (
-      <h1 className="text-4xl font-bold font-poppins mb-4 text-slate-900 dark:text-gray-100">
+      <h1 className="text-4xl font-bold font-poppins text-slate-900 dark:text-gray-100 mb-3">
         {title}
       </h1>
     )}
-
-    {/* Subtitle */}
-    <p className="text-lg text-slate-600 dark:text-gray-300 font-inter">
-      Read any article, get a reader-friendly version, TL;DR summary, and audio
-      narration instantly.
-    </p>
-
+    {/* Read Time Badge */}
+    {readTimeText && (
+      <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-4 py-2 text-base font-semibold mb-5 rounded-full">
+        <Clock className="w-5 h-5" />
+        {readTimeText}
+      </div>
+    )}
     {/* Buttons */}
-    <div className="flex items-center justify-center gap-3 mt-4">
+    <div className="flex items-center justify-center gap-3 mb-8">
+      {" "}
+      {/* increased bottom margin */}
       <Button
         onClick={onFocusMode}
         variant="outline"
