@@ -19,22 +19,10 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "My Vite App",
-        short_name: "ViteApp",
-        description: "A highly optimized Vite + React project",
-        theme_color: "#ffffff",
-        icons: [
-          {
-            src: "/pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
+        name: "ReadRight",
+        short_name: "readright",
+        description: "A reading companion app built to be accessible and dyslexic-friendly.",
+        theme_color: "#3B82F6",
       },
     }),
   ].filter(Boolean),
