@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/Omar8345/readright-backend/master/assets/banner.png" alt="ReadRight Banner" width="1000" />
 </p>
 
+[![Hits](https://hits.sh/github.com/Omar8345/readright.svg?style=for-the-badge)](https://hits.sh/github.com/Omar8345/readright/)
+
 # ReadRight - Accessible Reading Made Simple
 
 ReadRight is a web application designed to make online content more accessible for everyone, especially those with dyslexia or reading difficulties. Paste any article URL or text, and ReadRight will transform it into a dyslexia-friendly version with a TL;DR summary and audio narration.
