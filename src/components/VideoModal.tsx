@@ -7,20 +7,16 @@ interface VideoModalProps {
   videoUrl?: string;
 }
 
-export const VideoModal = ({
-  isOpen,
-  onClose,
-  videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ",
-}: VideoModalProps) => {
+export const VideoModal = ({ isOpen, onClose, videoUrl }: VideoModalProps) => {
   if (!isOpen) return null;
+
+  const processedVideoUrl = videoUrl.includes("?")
+    ? `${videoUrl}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0`
+    : `${videoUrl}?controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0`;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-blue-900/90 to-slate-900/95 backdrop-blur-md"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-blue-900/90 to-slate-900/95 backdrop-blur-md" />
 
       {/* Modal Content */}
       <div className="relative w-full max-w-6xl mx-auto fade-in-scale">
@@ -54,7 +50,7 @@ export const VideoModal = ({
         <div className="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
           {/* Video Iframe */}
           <iframe
-            src={videoUrl}
+            src={processedVideoUrl}
             title="ReadRight Demo Video"
             className="w-full h-full rounded-3xl"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
