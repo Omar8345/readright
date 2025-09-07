@@ -81,7 +81,7 @@ export const ReadPage = () => {
   const displayTitle = data?.title;
 
   const bgClass =
-    "bg-gradient-to-br from-slate-50 dark:from-gray-900 to-blue-50 dark:to-gray-800";
+    "bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950";
 
   if (focusMode) {
     return (
@@ -102,13 +102,20 @@ export const ReadPage = () => {
   }
 
   return (
-    <main className={`min-h-screen ${bgClass}`}>
+    <main className={`min-h-screen ${bgClass} relative overflow-hidden`}>
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-300/20 dark:bg-blue-800/20 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
+
       <Navigation />
       <ShareToast show={showToast} />
-      <div className="container mx-auto px-4 py-16 pt-24">
+
+      <div className="container mx-auto px-6 py-16 pt-32 relative z-10">
         <PageHeader
           title={displayTitle}
-          readTimeText={readTimeText} // pass the badge text
+          readTimeText={readTimeText}
           onFocusMode={() => setFocusMode(true)}
           onShare={handleShare}
         />
@@ -117,17 +124,17 @@ export const ReadPage = () => {
         {error && <Navigate to="/" />}
         {!loading && !error && data && (
           <div className="space-y-8">
-            <div className="grid gap-8 lg:grid-cols-3">
+            <div className="grid gap-6 md:gap-8 lg:grid-cols-3">
               <SectionCard
                 title="TL;DR"
                 colorClass="bg-blue-500"
                 content={
-                  <ul className="list-disc list-inside space-y-2 text-slate-700 dark:text-gray-300">
+                  <ul className="list-disc list-inside space-y-3 text-slate-700 dark:text-slate-300">
                     {data.tldr
                       .split("\n")
                       .filter((line: string) => line.trim())
                       .map((point: string, index: number) => (
-                        <li key={index} className="break-words">
+                        <li key={index} className="break-words leading-relaxed">
                           {point.replace(/^[•*-]\s*/, "").trim()}
                         </li>
                       ))}
@@ -136,10 +143,10 @@ export const ReadPage = () => {
               />
               <SectionCard
                 title="Summary"
-                colorClass="bg-green-500"
+                colorClass="bg-emerald-500"
                 content={
                   <div
-                    className="text-slate-700 dark:text-gray-300 leading-relaxed"
+                    className="text-slate-700 dark:text-slate-300 leading-relaxed"
                     dangerouslySetInnerHTML={{
                       __html: data.simplifiedText.replace(/\n/g, "<br>"),
                     }}

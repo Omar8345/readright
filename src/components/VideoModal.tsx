@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface VideoModalProps {
@@ -7,37 +7,85 @@ interface VideoModalProps {
   videoUrl?: string;
 }
 
-export const VideoModal = ({ isOpen, onClose, videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ" }: VideoModalProps) => {
+export const VideoModal = ({
+  isOpen,
+  onClose,
+  videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ",
+}: VideoModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-blue-900/90 to-slate-900/95 backdrop-blur-md"
         onClick={onClose}
       />
-      
+
       {/* Modal Content */}
-      <div className="relative w-full max-w-4xl mx-4 aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl animate-bounceIn">
-        {/* Close Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full"
-        >
-          <X className="w-5 h-5" />
-        </Button>
-        
-        {/* Video Iframe */}
-        <iframe
-          src={videoUrl}
-          title="ReadRight Demo Video"
-          className="w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+      <div className="relative w-full max-w-6xl mx-auto fade-in-scale">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6 px-2">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+              <Play className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white font-poppins">
+                ReadRight Demo
+              </h3>
+              <p className="text-sm text-slate-300">
+                See how ReadRight transforms articles
+              </p>
+            </div>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-110"
+          >
+            <X className="w-6 h-6" />
+          </Button>
+        </div>
+
+        {/* Video Container */}
+        <div className="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+          {/* Video Iframe */}
+          <iframe
+            src={videoUrl}
+            title="ReadRight Demo Video"
+            className="w-full h-full rounded-3xl"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+
+          {/* Loading Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center mb-4 mx-auto animate-pulse">
+                <Play className="w-8 h-8 text-white" />
+              </div>
+              <p className="text-white font-medium">Loading video...</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between mt-6 px-2">
+          <div className="text-sm text-slate-400">
+            Press{" "}
+            <kbd className="px-2 py-1 bg-white/10 rounded-md text-white">
+              Esc
+            </kbd>{" "}
+            to close
+          </div>
+          <div className="flex items-center gap-2 text-sm text-slate-400">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            HD Quality
+          </div>
+        </div>
       </div>
     </div>
   );

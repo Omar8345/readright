@@ -26,9 +26,13 @@ export const DarkModeToggle = () => {
   return (
     <button
       onClick={() => setDark(!dark)}
-      className="fixed bottom-4 right-4 z-[9999] p-2 rounded-full bg-gray-900 text-white dark:bg-yellow-400 dark:text-black shadow-lg flex items-center justify-center"
+      className="fixed bottom-6 right-6 z-[9999] w-14 h-14 rounded-2xl glass-effect border border-border/50 hover:border-border transition-all duration-300 hover:scale-110 flex items-center justify-center group shadow-xl"
     >
-      {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      {dark ? (
+        <Sun className="w-6 h-6 text-accent group-hover:rotate-12 transition-transform duration-300" />
+      ) : (
+        <Moon className="w-6 h-6 text-primary group-hover:-rotate-12 transition-transform duration-300" />
+      )}
     </button>
   );
 };

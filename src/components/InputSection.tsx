@@ -116,23 +116,29 @@ export const InputSection = () => {
   };
 
   return (
-    <section id="demo" className="py-20 bg-background dark:bg-gray-900">
+    <section
+      id="demo"
+      className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950"
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12 animate-fadeInUp">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-poppins text-foreground dark:text-gray-100">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-poppins text-slate-900 dark:text-white">
               Start Reading
-              <span className="gradient-text"> Instantly</span>
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent">
+                {" "}
+                Instantly
+              </span>
             </h2>
-            <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto font-inter">
+            <p className="text-xl text-slate-700 dark:text-slate-300 max-w-2xl mx-auto font-inter">
               Simply paste a URL, or upload your own text. We'll transform it
               into an accessible reading experience.
             </p>
           </div>
 
           {/* Input Card */}
-          <Card className="p-8 shadow-float bg-white dark:bg-gray-800 border border-border dark:border-gray-700 animate-fadeInUp">
+          <Card className="p-8 shadow-xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 animate-fadeInUp">
             {/* Input Type Tabs */}
             <div className="flex gap-2 mb-8">
               <Button
@@ -144,8 +150,8 @@ export const InputSection = () => {
                 className={`flex-1 rounded-full font-inter flex items-center justify-center gap-2
       ${
         inputType === "url"
-          ? "transform transition-transform duration-200 hover:scale-105 text-white dark:text-black"
-          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+          ? "bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white transform transition-transform duration-200 hover:scale-105"
+          : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
       }`}
               >
                 <Link className="w-4 h-4" />
@@ -160,8 +166,8 @@ export const InputSection = () => {
                 className={`flex-1 rounded-full font-inter flex items-center justify-center gap-2
       ${
         inputType === "text"
-          ? "transform transition-transform duration-200 hover:scale-105 text-white dark:text-black"
-          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+          ? "bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white transform transition-transform duration-200 hover:scale-105"
+          : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
       }`}
               >
                 <FileText className="w-4 h-4" />
@@ -173,18 +179,18 @@ export const InputSection = () => {
             <div className="space-y-6">
               {inputType === "url" && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground dark:text-gray-100 font-inter">
+                  <label className="text-sm font-medium text-slate-900 dark:text-slate-200 font-inter">
                     Article URL
                   </label>
                   <Input
                     placeholder="https://nytimes.com/article"
                     value={urlValue}
                     onChange={(e) => setUrlValue(e.target.value)}
-                    className="h-14 text-lg rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:border-secondary bg-background dark:bg-gray-700 text-foreground dark:text-gray-100 transition-colors"
+                    className="h-14 text-lg rounded-xl border-2 border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 transition-colors"
                   />
                   <div className="text-sm font-inter h-5">
                     {urlValue && !isUrlValid && (
-                      <span className="text-destructive dark:text-red-400">
+                      <span className="text-red-600 dark:text-red-400">
                         Invalid URL format.
                       </span>
                     )}
@@ -199,27 +205,27 @@ export const InputSection = () => {
 
               {inputType === "text" && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground dark:text-gray-100 font-inter">
+                  <label className="text-sm font-medium text-slate-900 dark:text-slate-200 font-inter">
                     Paste your text
                   </label>
                   <Textarea
                     placeholder="Paste at least 500 characters..."
                     value={textValue}
                     onChange={(e) => setTextValue(e.target.value)}
-                    className="min-h-40 text-lg rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:border-secondary bg-background dark:bg-gray-700 text-foreground dark:text-gray-100 transition-colors resize-y"
+                    className="min-h-40 text-lg rounded-xl border-2 border-slate-300 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 transition-colors resize-y"
                   />
                   <div className="flex justify-between text-sm font-inter">
                     <span
                       className={
                         isTextValid
                           ? "text-green-600 dark:text-green-400"
-                          : "text-muted-foreground dark:text-gray-300"
+                          : "text-slate-600 dark:text-slate-400"
                       }
                     >
                       {textLength} / 500 characters
                     </span>
                     {!isTextValid && textLength > 0 && (
-                      <span className="text-destructive dark:text-red-400">
+                      <span className="text-red-600 dark:text-red-400">
                         Need {500 - textLength} more
                       </span>
                     )}
@@ -238,7 +244,7 @@ export const InputSection = () => {
                   disabled={!canProcess || isProcessing}
                   variant="cta"
                   size="lg"
-                  className="w-full sm:w-auto px-12 py-6 text-lg font-poppins bg-primary text-primary-foreground dark:bg-yellow-600 dark:text-black rounded-xl"
+                  className="w-full sm:w-auto px-12 py-6 text-lg font-poppins bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-0"
                 >
                   {isProcessing ? (
                     <>

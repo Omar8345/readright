@@ -1,70 +1,105 @@
 import { Card } from "@/components/ui/card";
-import { Eye, FileText, Volume2, Settings, Zap, Cloud } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Eye,
+  FileText,
+  Volume2,
+  Settings,
+  Zap,
+  Cloud,
+  ArrowRight,
+} from "lucide-react";
 
 const features = [
   {
     icon: Eye,
-    title: "Dyslexia-Friendly Text",
+    title: "Dyslexia-Friendly Design",
     description:
-      "Optimized spacing, font choices, and contrast for better readability",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "Optimized typography, spacing, and contrast following accessibility best practices for enhanced readability",
+    color: "text-blue-600 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
   {
     icon: FileText,
-    title: "Smart TL;DR",
+    title: "AI-Powered Summaries",
     description:
-      "AI-generated summaries that capture the key points in bullet format",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "Intelligent TL;DR generation that captures essential information in digestible format",
+    color: "text-blue-600 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
   {
     icon: Volume2,
-    title: "Audio Narration",
+    title: "Natural Voice Synthesis",
     description:
-      "High-quality text-to-speech with natural voices and adjustable speed",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "High-quality text-to-speech with adjustable speed and natural pronunciation",
+    color: "text-blue-600 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
   {
     icon: Settings,
-    title: "Customizable Display",
+    title: "Personalized Experience",
     description:
-      "Adjust font size, spacing, colors, and themes to your preference",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "Customizable themes, fonts, and layouts that adapt to your reading preferences",
+    color: "text-blue-500 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
   {
     icon: Zap,
-    title: "Lightning Fast",
+    title: "Lightning Performance",
     description:
-      "Process any article in seconds with our optimized AI pipeline",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "Fast processing with optimized AI pipeline for quick article transformation",
+    color: "text-blue-600 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
   {
     icon: Cloud,
-    title: "Cloud Access",
+    title: "Cloud Storage",
     description:
-      "Your simplified text and audio are stored securely so you can revisit anytime",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      "Your processed content is stored in the cloud for easy access and development purposes",
+    color: "text-blue-600 dark:text-blue-400",
+    bgClass: "bg-blue-100 dark:bg-blue-950/50",
+    borderClass: "border-blue-200 dark:border-blue-800",
   },
 ];
 
 export const FeaturesSection = () => {
   return (
-    <section id="features" className="py-20 bg-gradient-hero">
-      <div className="container mx-auto px-4">
+    <section
+      id="features"
+      className="py-32 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950 relative overflow-hidden"
+    >
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/3 left-0 w-96 h-96 bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-blue-300/20 dark:bg-blue-800/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-poppins">
-            Powerful Features for
-            <span className="gradient-text"> Everyone</span>
+        <div className="text-center mb-20 fade-in-up">
+          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-full px-6 py-3 mb-8">
+            <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+              ✨ Features
+            </span>
+          </div>
+
+          <h2 className="text-5xl lg:text-7xl font-bold mb-8 font-poppins">
+            <span className="block text-slate-900 dark:text-white">
+              Powerful Tools
+            </span>
+            <span className="block bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent">
+              for Modern Reading
+            </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-inter">
-            ReadRight combines cutting-edge AI with accessibility best practices
-            to create the perfect reading experience for everyone.
+
+          <p className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-inter">
+            Experience the future of accessible reading with our comprehensive
+            suite of AI-powered tools designed for every user's needs.
           </p>
         </div>
 
@@ -73,22 +108,33 @@ export const FeaturesSection = () => {
           {features.map((feature, index) => (
             <Card
               key={feature.title}
-              className="p-8 bg-white dark:bg-gray-800 border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2 hover:rotate-1 animate-fadeInUp group"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className={`group relative p-8 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm ${feature.borderClass} ${feature.bgClass} hover:bg-white dark:hover:bg-slate-800 border transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden fade-in-scale`}
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div
-                className={`w-16 h-16 ${feature.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-              >
-                <feature.icon className={`w-8 h-8 ${feature.color}`} />
+              {/* Icon Container */}
+              <div className="relative mb-6">
+                <div
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center ${feature.bgClass} border ${feature.borderClass} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
+                >
+                  <feature.icon className={`w-8 h-8 ${feature.color}`} />
+                </div>
               </div>
 
-              <h3 className="text-xl font-bold mb-4 text-foreground font-poppins">
-                {feature.title}
-              </h3>
+              {/* Content */}
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white font-poppins group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  {feature.title}
+                </h3>
 
-              <p className="text-muted-foreground leading-relaxed font-inter">
-                {feature.description}
-              </p>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-inter">
+                  {feature.description}
+                </p>
+              </div>
+
+              {/* Background Pattern */}
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                <feature.icon className="w-full h-full text-slate-400 dark:text-slate-600" />
+              </div>
             </Card>
           ))}
         </div>
