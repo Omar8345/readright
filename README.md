@@ -2,7 +2,11 @@
   <img src="https://raw.githubusercontent.com/Omar8345/readright-backend/master/assets/banner.png" alt="ReadRight Banner" width="1000" />
 </p>
 
-[![Hits](https://hits.sh/github.com/Omar8345/readright.svg?style=for-the-badge)](https://hits.sh/github.com/Omar8345/readright/)
+<p align="center">
+  <a href="https://readright.appwrite.network" target="_blank">
+    <img src="https://img.shields.io/badge/🚀 Live Demo-readright.appwrite.network-FF477E?style=for-the-badge" alt="ReadRight Demo"/>
+  </a>
+</p>
 
 # ReadRight - Accessible Reading Made Simple
 
